@@ -24,8 +24,8 @@ function getLogo(symbol){
     })
 }
 //GET Fectch Requisition
-let inicio = 11;
-let fim = 20;
+let inicio = 1;
+let fim = 10;
 fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?start='+inicio+'&limit='+fim+'&CMC_PRO_API_KEY='+apikey.key)
 .then(
     (response)=>{
@@ -40,13 +40,15 @@ fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?start='+inicio+'&
         //exibir as moedas
         for(let i =inicio-1; i<fim; i++){
             //Mostrar informação da api
+            var date = api.data[i].first_historical_data.split('T');
+            date = date[0].split('-');
             texto = texto + `
                 <div class="media">
                     <img src="" id="${api.data[i].symbol}-logo" class="coin-logo" alt="${api.data[i].symbol}-logo" width="100" height="60">
                     <div class="media-body">
                         <h5 class="mt-2">${api.data[i].name}</h5
                         <p>${api.data[i].symbol}</p>
-                        <p>${api.data[i].first_historical_data}</p>
+                        <p>CMC desde: ${date[2]}/${date[1]}/${date[0]}</p>
                     </div>
                 </div>
             `;
